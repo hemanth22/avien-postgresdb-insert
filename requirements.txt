@@ -1,0 +1,6 @@
+requests
+psycopg2-binary
+pymongo
+dnspython
+redis
+pytz

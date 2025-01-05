@@ -1,0 +1,40 @@
+version: 2.1
+
+executors:
+  default:
+    docker:
+      - image: quay.io/hemanth22/rockylinux9:9
+
+jobs:
+  build:
+    executor: default
+    steps:
+      - checkout
+      - run:
+          name: Print Python Verson
+          command: |
+            dnf install python312 python3-pip postgresql -y
+            python3 -V
+            python3 -m pip install requests
+            /usr/bin/python3.12 -V
+            /usr/bin/python3.12 -m ensurepip
+            /usr/bin/python3.12 -m pip install pip --upgrade
+            /usr/bin/python3.12 -m pip install -r requirements.txt
+      - run:
+          name: Postgresql Heartbeat job
+          command: |
+            ls -ltr
+            /usr/bin/python3.12 insert_to_postgresql.py
+      - run:
+          name: System date
+          command: |
+            date
+
+workflows:
+  db_healthcheck_app:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only:
+                - main
