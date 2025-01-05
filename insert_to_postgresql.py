@@ -23,7 +23,7 @@ def insert_remainder_message():
 
         # Insert the specified message
         insert_query = """
-        INSERT INTO remainder_messages (message_date, message) VALUES (TO_DATE('06-01-2025', 'DD-MM-YYYY'), 'Ask doctor about next vaccination date');
+        INSERT INTO remainder_messages (message_date, message) VALUES (TO_DATE('06-01-2025', 'DD-MM-YYYY'), 'Ensure to close the CR Approvals and Sign-off Submissions before 11:00 AM');
         """
         cursor.execute(insert_query)
         connection.commit()
